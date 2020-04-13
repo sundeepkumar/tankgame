@@ -1,15 +1,15 @@
-package edu.nyu.cs.fb1258;
+package edu.nyu.cs.sk7374;
 
 import java.util.ArrayList;
 
-import edu.nyu.cs.fb1258.Alien;
-import edu.nyu.cs.fb1258.Spaceship;
-import edu.nyu.cs.fb1258.Bullet;
+import edu.nyu.cs.sk7374.Alien;
+import edu.nyu.cs.sk7374.Bullet;
+import edu.nyu.cs.sk7374.Spaceship;
 import processing.core.*;
 
 /**
  * Basic controller for Space Invaders
- * @author Foo Barstein
+ * @author Sanchit Kumar
  * @version 0.1
  */
 public class App extends PApplet {
@@ -250,7 +250,7 @@ public class App extends PApplet {
 	 * @param args Command-line arguments (ignored)
 	 */
 	public static void main(String[] args) {
-		PApplet.main("edu.nyu.cs.fb1258.App");
+		PApplet.main("edu.nyu.cs.sk7374.App");
 	}
 	
 }

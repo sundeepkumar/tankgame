@@ -1,4 +1,4 @@
-package edu.nyu.cs.fb1258;
+package edu.nyu.cs.sk7374;
 import processing.core.PApplet;
 import processing.core.PImage;
 

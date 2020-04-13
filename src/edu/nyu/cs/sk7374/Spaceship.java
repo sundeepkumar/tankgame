@@ -1,10 +1,7 @@
-package edu.nyu.cs.fb1258;
-
-import java.awt.event.ActionListener;
-import java.util.Timer;
+package edu.nyu.cs.sk7374;
 
 import processing.core.PApplet;
-import processing.core.PImage;
+
 
 /**
  * 
@@ -25,7 +22,7 @@ public class Spaceship  extends GameObject {
 	
 	private final static String RESUME_MESSAGE= "Enter to Resume!!";
 	
-	private final static String NUM_LIVES =  "Num Lives Left!!";
+	private final static String NUM_LIVES =  " Lives Left!!";
 	
 	private static int numlives = 3;
 	
