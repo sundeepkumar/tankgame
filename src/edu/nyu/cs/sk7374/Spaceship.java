@@ -16,7 +16,8 @@ public class Spaceship  extends GameObject {
 	
 	
 	//make sure the image file is in the src  folder
-	private final static String SPACESHIP_IMAGE_PATH = "spaceship.png"; // image file
+	//private final static String SPACESHIP_IMAGE_PATH = "spaceship.png"; // image file
+	private final static String SPACESHIP_IMAGE_PATH = "Tank1.png"; // image file
 	
 	private final static String GAME_OVER = "Game Over";
 	

@@ -36,6 +36,7 @@ public class GameObject {
 		//private final static String SPACESHIP_IMAGE_PATH = "spaceship.png"; // image file
 		private PImage img; //will hold the image to  use for this spaceship
 		
+		
 		private int x, y; //position
 		private int speedX = 5; //speed in x  direction... start out going to the right
 		private int speedY = 5; //speed in Y direction... the y position is changed by this amount every time the ship goes up or down
