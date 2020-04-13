@@ -27,8 +27,12 @@ public class App extends PApplet {
 	public final static int APP_MARGIN = 60; 
 	public final static int NUM_ALIENS = 20;
 	
+	private boolean stopDraw = false;
+	
 	//variable to hold the spaceship
 	private Spaceship spaceship;
+	
+
 
 	//an array to hold our friendly aliens
 	private ArrayList<Alien> aliens = new  ArrayList<Alien>(); //will hold a bunch of  aliens
@@ -37,6 +41,11 @@ public class App extends PApplet {
 	private ArrayList<Bullet> bullets = new  ArrayList<Bullet>();
 
 	//setters and getters
+	
+	public void stopDraw(boolean stopDraw)
+	{
+		this.stopDraw = stopDraw;
+	}
 	/**
 	 * Getter for the ArrayList of Alien objects currently on the screen
 	 * @return ArrayList of Alien objects
@@ -115,7 +124,10 @@ public class App extends PApplet {
 	 */
 	public void draw() {
 		//wipe the screen blank
+		if(stopDraw)
+			return;
 		this.background(this.BLACK);
+		
 		
 		//draw the spaceship
 		this.spaceship.move(); //have the spaceship  move itself to a new location
@@ -142,7 +154,7 @@ public class App extends PApplet {
 		for (Bullet bullet : this.bullets) {
 			for (Alien alien : this.aliens) {
 				//our Bullet class has a static  method that checks whether there  is a collision
-				if (Bullet.isCollision(bullet,  alien)) {
+				if (Bullet.isCollision(bullet,  alien) && !bullet.enemy) {
 					//if there is a collision,  remove the bullet and the  alien from the screen
 					aliensToRemove.add(alien); // add this alien to the list  that we will remove
 					bulletsToRemove.add(bullet);  //add this bullet to the  list that we will remove
@@ -150,13 +162,48 @@ public class App extends PApplet {
 			}
 		}
 		
+		ArrayList<Bullet> enemyBulletsToRemove = new  ArrayList<Bullet>(); //will hold the  next generation of bullets
+		boolean removeShip = false;
+		for (Bullet bullet : this.bullets) {
+			//our Bullet class has a static  method that checks whether there  is a collision
+			if (Bullet.isCollision(bullet,  this.spaceship) && bullet.enemy) {
+				//if there is a collision,  remove the bullet and the  alien from the screen
+				removeShip = true; // add this alien to the list  that we will remove
+				enemyBulletsToRemove.add(bullet);  //add this bullet to the  list that we will remove
+				break;
+			}
+		}
+		
+		if(removeShip)
+			this.spaceship.kill(); //tell the alien to  kill itself
+		
+		
+		
 		//enter all aliens we earmarked as  removable into removal proceedings
 		for (Alien alien : aliensToRemove) {
 			alien.kill(); //tell the alien to  kill itself
 		}
 		
+		int numAliens = this.aliens.size();
+		if(numAliens == 0 )
+		{
+			textSize(30);
+			text("YOU WIN!!", w/2, h/2);
+			stopDraw(true);
+		}
+		else 
+		{
+			textSize(30);
+			text(numAliens+"", w/15, h/8);
+		}
+		
 		//remove all bullets we earmarked as  removable
 		for (Bullet bullet:bulletsToRemove) {
+			bullet.kill(); //tell the bullet to  kill itself
+		}
+		
+		//remove all bullets we earmarked as  removable
+		for (Bullet bullet:enemyBulletsToRemove) {
 			bullet.kill(); //tell the bullet to  kill itself
 		}
 
@@ -191,7 +238,12 @@ public class App extends PApplet {
 			//handle space key
 			this.spaceship.shoot();
 		}
+		else if ( key == PConstants.ENTER)
+		{
+			stopDraw(false);
+		}
 	}	
+	
 	
 	/**
 	 * Automatically called to start your program.  This method calls PApplet's main method and passes it the class name of this class.

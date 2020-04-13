@@ -15,13 +15,44 @@ public class Bullet {
 	public int x, y; //position
 	private int speedY = -10; //speed in y  direction... going up-screen
 	
-	public Bullet(int x, int y, PApplet app) {
+	private boolean up;
+	
+	public boolean enemy;
+	
+	public Bullet(int x, int y, PApplet app ) {
 		//set up initial properties for this  bullet
 		this.app = (App) app; //keep a reference  to the PApplet class to handle all  Processing-specific functions and  variables
 
 		//position it on screen
 		this.x = x;
 		this.y = y;
+		this.up = true;
+		this.enemy = false;
+		
+		
+		//load the image and store in PImage  variable
+		this.img = app.loadImage(Bullet.BULLET_IMAGE_PATH);
+		
+		//add this Bullet object to the  PApplet's list of bullets
+		this.app.getBullets().add(this);
+
+	}
+	
+	public Bullet(int x, int y, PApplet app , boolean up , boolean enemy ) {
+		//set up initial properties for this  bullet
+		this.app = (App) app; //keep a reference  to the PApplet class to handle all  Processing-specific functions and  variables
+
+		//position it on screen
+		this.x = x;
+		this.y = y;
+		
+		this.up = up;
+		if(!this.up) {
+			this.speedY = -1* this.speedY;
+		}
+		
+		this.enemy = true;
+		
 		
 		//load the image and store in PImage  variable
 		this.img = app.loadImage(Bullet.BULLET_IMAGE_PATH);
@@ -99,6 +130,19 @@ public class Bullet {
 		//check whether bullet is within the box  representing the alien
 		if (bullet.x >= alien.getX() && bullet.x +  bullet.getWidth() <= alien.getX() + alien. getWidth()) {
 			if (bullet.y >= alien.getY() && bullet.y  + bullet.getHeight() <= alien.getY() +  alien.getHeight()) {
+				collision = true;
+			}
+		}
+		
+		return collision;
+	}
+	
+	public static boolean isCollision(Bullet  bullet, Spaceship ship) {
+		boolean collision = false; //flag to  indicate whether a collision has been  detected
+		
+		//check whether bullet is within the box  representing the alien
+		if (bullet.x >= ship.getX() && bullet.x +  bullet.getWidth() <= ship.getX() + ship. getWidth()) {
+			if (bullet.y >= ship.getY() && bullet.y  + bullet.getHeight() <= ship.getY() +  ship.getHeight()) {
 				collision = true;
 			}
 		}

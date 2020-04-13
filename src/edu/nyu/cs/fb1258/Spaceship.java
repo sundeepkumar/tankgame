@@ -1,5 +1,8 @@
 package edu.nyu.cs.fb1258;
 
+import java.awt.event.ActionListener;
+import java.util.Timer;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -17,6 +20,14 @@ public class Spaceship  extends GameObject {
 	
 	//make sure the image file is in the src  folder
 	private final static String SPACESHIP_IMAGE_PATH = "spaceship.png"; // image file
+	
+	private final static String GAME_OVER = "Game Over";
+	
+	private final static String RESUME_MESSAGE= "Enter to Resume!!";
+	
+	private final static String NUM_LIVES =  "Num Lives Left!!";
+	
+	private static int numlives = 3;
 	
 
 	public int  setInitialX() {
@@ -46,6 +57,30 @@ public class Spaceship  extends GameObject {
 
 		//create bullet object
 		Bullet bullet = new Bullet(x, y, this.getApp());
+		
+	}
+	
+	public void kill() {
+		if(numlives == 1) {
+			setAlive(false);
+			this.getApp().textSize(30);
+			this.getApp().text(GAME_OVER, getX(), getY());
+			this.getApp().stopDraw(true);
+		}
+		else 
+		{
+			
+			
+			numlives--;
+			this.getApp().textSize(30);
+			this.getApp().text(numlives+ NUM_LIVES, getX(), getY());
+			this.getApp().text(RESUME_MESSAGE, 400,200);
+			this.getApp().stopDraw(true);
+			
+		}
+		
+
+		
 		
 	}
 	

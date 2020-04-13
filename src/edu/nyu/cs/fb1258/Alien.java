@@ -41,6 +41,14 @@ public class Alien extends GameObject {
 		int speed = (int) ((Math.random() * Alien.MAX_SPEED * 2) - Alien.MAX_SPEED);
 		return speed;
 	}
+	
+	public boolean canShoot() {
+		//generate a random int between the  alien's -MAX_SPEED and +MAX_SPEED
+		int num = (int) (Math.random() * 500) ;
+		if(num < 2 ) 
+			return true;
+		return false;
+	}
 
 
 	/**
@@ -91,6 +99,18 @@ public class Alien extends GameObject {
 		else if (newY + this.getHeight() > this.getApp().width) newY = getY(); //if it went too  far down, don't let it go any further
 		//update to the new position
 		this.setPosition(newX, newY);
+		if(canShoot())
+			shoot();
+		
+	}
+	
+	public void shoot() {
+		//create a new bullet object positioned  at the center of this spaceship
+		int x = (int) (getX() + (this.getWidth()  / 2)); //the center x position of this  spaceship
+		int y = (int) (getY() - (this. getHeight() / 2)); //the center y  position of this spaceship
+
+		//create bullet object
+		Bullet bullet = new Bullet(x, y-100, this.getApp(),false,true);
 		
 	}
 	
