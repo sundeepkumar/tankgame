@@ -16,6 +16,18 @@ public class GameObject {
 		//PApplet app;
 		private App app;
 		
+		private int movementType = 1; // 0 = left right or up down 1 =  Whole battle field 
+		
+		public int getMovementType()
+		{
+			return this.movementType;
+		}
+		
+		public void setMovementType(int movementType)
+		{
+			this.movementType = movementType;
+		}
+		
 		public PImage getImg() {
 			return img;
 		}
@@ -28,6 +40,18 @@ public class GameObject {
 		}
 		public void setAlive(boolean isAlive) {
 			this.isAlive = isAlive;
+		}
+		
+		private int direction = 0;
+		
+		public int getDirection()
+		{
+			return this.direction;
+		}
+		
+		public void setDirection(int direction)
+		{
+			this.direction = direction;
 		}
 
 		private boolean isAlive = true; //flag to  hold living status of this alien
@@ -123,23 +147,41 @@ public class GameObject {
 		 * Slide the spaceship further to the right  or left, depending upon the current  direction it's moving.
 		 */
 		public void move() {
-			int newX = this.x + this.speedX; // calculate move by whichever amount is  specified in speedX variable.
-			
-			//check bounds
-			boolean outOfBoundsToTheLeft = newX < 0  + App.APP_MARGIN; //too far to the left?
-			boolean outOfBoundsToTheRight = newX >  this.app.width - this.getWidth() - App. APP_MARGIN; //too far to the right?
-
-			//if out of bounds...
-			if (outOfBoundsToTheRight ||  outOfBoundsToTheLeft) {
-				 //reverse direction
-				this.toggleDirection(); //inverts  the sign of speed
-				newX = this.x + this.speedX; // calculate move in new direction
+			if((getMovementType() ==1 ) || (getDirection()== 0 )|| (getDirection() == 2)) {
+				int newX = getX() + getSpeedX(); // calculate move by whichever amount is  specified in speedX variable.
+				
+				//check bounds
+				boolean outOfBoundsToTheLeft = newX < 0  + App.APP_MARGIN; //too far to the left?
+				boolean outOfBoundsToTheRight = newX >  this.getApp().width - this.getWidth() - App. APP_MARGIN; //too far to the right?
+		
+				//if out of bounds...
+				if (outOfBoundsToTheRight ||  outOfBoundsToTheLeft) {
+					 //reverse direction
+					this.toggleDirection(); //inverts  the sign of speed
+					newX = this.getX() + this.getSpeedX(); // calculate move in new direction
+				}
+				
+				//make update to position
+				setX(newX);
 			}
+			if((getMovementType() ==1 ) || (getDirection()== 1 )|| (getDirection() == 3)) {
 			
-			//make update to position
-			this.x = newX;
-			
-		}
+				int newY = this.getY() + this.getSpeedY(); // calculate move by whichever amount is  specified in speedY variable.
+				//check bounds
+				boolean outOfBoundsToTheTop = newY > getApp().getHeight()  - App.APP_MARGIN; //too far to the Top?
+				boolean outOfBoundsToTheBottom = newY <  0 + App. APP_MARGIN; //too far to the bottom?
+		
+				//if out of bounds...
+				if (outOfBoundsToTheTop ||  outOfBoundsToTheBottom ) {
+					 //reverse direction
+					this.toggleDirectionY(); //inverts  the sign of speed
+					newY = this.getY() + this.getSpeedY();// calculate move in new direction
+				}
+				
+				//make update to position
+				setY(newY);	
+			}
+	    }
 		
 		/**
 		 * Sets by how much this spaceship moves  each frame.
@@ -170,11 +212,20 @@ public class GameObject {
 		}
 		
 		/**
+		 * Move this spaceship in the opposite  direction from which it is currently moving
+		 */
+		public void toggleDirectionY() {
+			this.speedY = -this.speedY; //invert the  sign of the speed it's currently moving
+		}
+		
+		/**
 		 * Set speed such that the spaceship moves  to the right.
 		 */
 		public void goRight() {
 			//set speed to a positive value
-			this.speedX = Math.abs(this.speedX);
+			 this.speedX = Math.abs(this.speedX);
+			
+			
 		}
 
 		/**
@@ -218,7 +269,6 @@ public class GameObject {
 				this.y = 0;
 			}
 		}
-		
 		
 
 }

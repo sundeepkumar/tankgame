@@ -16,7 +16,7 @@ public class App extends PApplet {
 	
 	//window size of this app
 	private final int w = 800;
-	private final int h = 400;
+	private final int h = 600;
 	
 	//make constants for some common colors... it's ok to make constants public
 	public final int BLACK = this.color(0,0,0);
@@ -86,6 +86,16 @@ public class App extends PApplet {
 		this.size(this.w, this.h); //set window size		
 	}
 	
+	public int getWidth()
+	{
+		return w;
+	}
+	
+	public int getHeight()
+	{
+		return h;
+	}
+	
 	/**
 	 * Called once on load. Used to create the  window and "global" settings.
 	 */
@@ -113,7 +123,7 @@ public class App extends PApplet {
 			if (x > this.width - alien.getWidth() - App.APP_MARGIN) {
 				//move down to the next line  before drawing next alien
 				x = App.APP_MARGIN; //reset back  to left side of screen
-				y += alien.getHeight() + App.ALIEN_SPACING; //upadte y so the  next row of aliens appears  further down the screen
+				y += alien.getHeight() + App.ALIEN_SPACING; //update y so the  next row of aliens appears  further down the screen
 			}
 			
 		}
@@ -241,6 +251,22 @@ public class App extends PApplet {
 		else if ( key == PConstants.ENTER)
 		{
 			stopDraw(false);
+		}
+		else if(key == 't' || key == 'T')
+		{
+			this.spaceship.goTurn();  //Turn
+		}
+		else if(key == 'q' || key == 'Q')
+		{
+			this.spaceship.setMovementType(0);
+		}
+		else if(key == 'p' || key == 'P')
+		{
+			this.spaceship.setMovementType(1);
+		}		
+		else if(key == 'r' || key == 'R')
+		{
+			setup();
 		}
 	}	
 	

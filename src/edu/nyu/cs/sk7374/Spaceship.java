@@ -17,7 +17,15 @@ public class Spaceship  extends GameObject {
 	
 	//make sure the image file is in the src  folder
 	//private final static String SPACESHIP_IMAGE_PATH = "spaceship.png"; // image file
-	private final static String SPACESHIP_IMAGE_PATH = "Tank1.png"; // image file
+	private final static String SPACESHIP_IMAGE_PATH = "TankU.png"; // image file
+	
+	private final static String SPACESHIP_IMAGE_PATH_UP = "TankU.png"; // image file
+	
+	private final static String SPACESHIP_IMAGE_PATH_LEFT = "TankL.png"; // image file
+	
+	private final static String SPACESHIP_IMAGE_PATH_DOWN = "TankD.png"; // image file
+	
+	private final static String SPACESHIP_IMAGE_PATH_RIGHT = "TankR.png"; // image file
 	
 	private final static String GAME_OVER = "Game Over";
 	
@@ -25,8 +33,15 @@ public class Spaceship  extends GameObject {
 	
 	private final static String NUM_LIVES =  " Lives Left!!";
 	
-	private static int numlives = 3;
+	private  int numlives = 3;
 	
+	//private int direction = 0;
+	
+	public void goTurn()
+	{
+		this.setDirection((this.getDirection()+1)%4); 
+		setImg(getApp().loadImage(getImage()));
+	}
 
 	public int  setInitialX() {
 		return (int) (this.getApp().width / 2); //x  position centered on screen
@@ -39,7 +54,14 @@ public class Spaceship  extends GameObject {
 	
 	public String  getImage()
 	{
-		return SPACESHIP_IMAGE_PATH;
+		if(this.getDirection()== 0 )
+			return SPACESHIP_IMAGE_PATH_UP;
+		else if(this.getDirection() == 1 )
+			return SPACESHIP_IMAGE_PATH_LEFT;
+		else if(this.getDirection() == 2 )
+			return SPACESHIP_IMAGE_PATH_DOWN;
+		else 
+			return SPACESHIP_IMAGE_PATH_RIGHT;
 	}
 	public Spaceship(PApplet app) {
 		super(app);	
@@ -67,8 +89,7 @@ public class Spaceship  extends GameObject {
 		}
 		else 
 		{
-			
-			
+					
 			numlives--;
 			this.getApp().textSize(30);
 			this.getApp().text(numlives+ NUM_LIVES, getX(), getY());
@@ -81,6 +102,8 @@ public class Spaceship  extends GameObject {
 		
 		
 	}
+	
+	
 	
 
 }
