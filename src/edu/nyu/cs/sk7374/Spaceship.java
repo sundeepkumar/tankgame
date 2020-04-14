@@ -72,11 +72,24 @@ public class Spaceship  extends GameObject {
 	 */
 	public void shoot() {
 		//create a new bullet object positioned  at the center of this spaceship
-		int x = (int) (getX() + (this.getWidth()  / 2)); //the center x position of this  spaceship
-		int y = (int) (getY() - (this. getHeight() / 2)); //the center y  position of this spaceship
-
+		int x=getX();
+		int y= getY();
+		if(getDirection()== 0 ) {
+			x = (int) (getX() + (this.getWidth()  / 2)); //the center x position of this  spaceship
+			y = (int) (getY() - (this. getHeight() / 2)); //the center y  position of this spaceship
+		}
+		else if(getDirection()== 1 ) {
+			y = (int) (getY() + (this. getHeight() / 2)); //the center y  position of this spaceship
+		}
+		else if(getDirection()== 2 ) {
+			x = (int) (getX() + (this.getWidth()  / 2)); //the center x position of this  spaceship
+			y = (int) (getY() + (this. getHeight() / 2)); //the center y  position of this spaceship
+		}
+		else if(getDirection()== 5 ) {
+			x = (int) (getX() - (this.getWidth() )); //the center x position of this  spaceship
+		}
 		//create bullet object
-		Bullet bullet = new Bullet(x, y, this.getApp());
+		Bullet bullet = new Bullet(x, y, this.getApp(),getDirection(),false);
 		
 	}
 	

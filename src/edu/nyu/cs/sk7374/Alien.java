@@ -110,7 +110,7 @@ public class Alien extends GameObject {
 		int y = (int) (getY() - (this. getHeight() / 2)); //the center y  position of this spaceship
 
 		//create bullet object
-		Bullet bullet = new Bullet(x, y-100, this.getApp(),false,true);
+		Bullet bullet = new Bullet(x, y-100, this.getApp(),2,true);
 		
 	}
 	

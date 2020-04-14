@@ -15,7 +15,10 @@ public class Bullet {
 	public int x, y; //position
 	private int speedY = -10; //speed in y  direction... going up-screen
 	
-	private boolean up;
+	private int speedX = -10; //speed in x  direction... going side ways 
+	
+	private int direction;
+	
 	
 	public boolean enemy;
 	
@@ -26,7 +29,7 @@ public class Bullet {
 		//position it on screen
 		this.x = x;
 		this.y = y;
-		this.up = true;
+		this.direction = 1;
 		this.enemy = false;
 		
 		
@@ -38,7 +41,7 @@ public class Bullet {
 
 	}
 	
-	public Bullet(int x, int y, PApplet app , boolean up , boolean enemy ) {
+	public Bullet(int x, int y, PApplet app , int direction , boolean enemy ) {
 		//set up initial properties for this  bullet
 		this.app = (App) app; //keep a reference  to the PApplet class to handle all  Processing-specific functions and  variables
 
@@ -46,12 +49,15 @@ public class Bullet {
 		this.x = x;
 		this.y = y;
 		
-		this.up = up;
-		if(!this.up) {
+		this.direction = direction;
+		if(this.direction == 2) {
 			this.speedY = -1* this.speedY;
 		}
+		else if(this.direction == 3) {
+			this.speedX = -1* this.speedX;
+		}
 		
-		this.enemy = true;
+		this.enemy = enemy;
 		
 		
 		//load the image and store in PImage  variable
@@ -80,19 +86,36 @@ public class Bullet {
 	 * Slide the bullet further up the screen.
 	 */
 	public void move() {
-		int newY = this.y + this.speedY; // calculate move by whichever amount is  specified in speedY variable.
+		    if(direction== 0 || direction == 2) {
+				int newY = this.y + this.speedY; // calculate move by whichever amount is  specified in speedY variable.
+				
+				//check bounds
+				boolean outOfBoundsToTheTop = newY < 0 +  this.getHeight(); //too far up the  screen?
 		
-		//check bounds
-		boolean outOfBoundsToTheTop = newY < 0 +  this.getHeight(); //too far up the  screen?
-
-		//if out of bounds...
-		if (outOfBoundsToTheTop) {
-			 //remove it from the array of  bullets
-			this.app.getBullets().remove(this); //aren't  ArrayLists great?
-		}
-		
-		//make update to position
-		this.y = newY;
+				//if out of bounds...
+				if (outOfBoundsToTheTop) {
+					 //remove it from the array of  bullets
+					this.app.getBullets().remove(this); //aren't  ArrayLists great?
+				}
+				
+				//make update to position
+				this.y = newY;
+		    }
+		    else {
+		    	int newX = this.x + this.speedX; // calculate move by whichever amount is  specified in speedY variable.
+			
+			//check bounds
+		    	boolean outOfBoundsToTheLeft = newX < 0 +  this.getWidth(); //too far up the  screen?
+	
+			//if out of bounds...
+		    	if (outOfBoundsToTheLeft) {
+				 //remove it from the array of  bullets
+		    		this.app.getBullets().remove(this); //aren't  ArrayLists great?
+		    	}
+			
+		    	//make update to position
+		    	this.x = newX;
+		    }
 		
 	}
 	
