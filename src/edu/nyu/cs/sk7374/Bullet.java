@@ -10,6 +10,7 @@ public class Bullet {
 	
 	//make sure the image file is in the src  folder
 	private final static String BULLET_IMAGE_PATH = "bullet.png"; //image  file
+	private final static String BULLET_IMAGE_PATH_LEFT = "bulletL.png"; //image  file
 	private PImage img; //will hold the image to  use for this bullet
 	
 	public int x, y; //position
@@ -18,6 +19,16 @@ public class Bullet {
 	private int speedX = -10; //speed in x  direction... going side ways 
 	
 	private int direction;
+	
+	private int getDirection()
+	{
+		return this.direction;
+	}
+	
+	private void setDirection(int direction)
+	{
+		this.direction = direction;
+	}
 	
 	
 	public boolean enemy;
@@ -34,8 +45,10 @@ public class Bullet {
 		
 		
 		//load the image and store in PImage  variable
-		this.img = app.loadImage(Bullet.BULLET_IMAGE_PATH);
-		
+		if(this.getDirection() == 0   ||  this.getDirection() == 2)
+			this.img = app.loadImage(Bullet.BULLET_IMAGE_PATH);
+		else 
+			this.img = app.loadImage(Bullet.BULLET_IMAGE_PATH_LEFT);
 		//add this Bullet object to the  PApplet's list of bullets
 		this.app.getBullets().add(this);
 
@@ -60,8 +73,12 @@ public class Bullet {
 		this.enemy = enemy;
 		
 		
+	
 		//load the image and store in PImage  variable
-		this.img = app.loadImage(Bullet.BULLET_IMAGE_PATH);
+		if(this.getDirection() == 0   ||  this.getDirection() == 2)
+			this.img = app.loadImage(Bullet.BULLET_IMAGE_PATH);
+		else 
+			this.img = app.loadImage(Bullet.BULLET_IMAGE_PATH_LEFT);
 		
 		//add this Bullet object to the  PApplet's list of bullets
 		this.app.getBullets().add(this);

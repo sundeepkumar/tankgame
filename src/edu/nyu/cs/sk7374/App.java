@@ -32,6 +32,12 @@ public class App extends PApplet {
 	//variable to hold the spaceship
 	private Spaceship spaceship;
 	
+	private  PImage  bgImage; 
+	
+	private int skin;
+	
+	
+	
 
 
 	//an array to hold our friendly aliens
@@ -100,7 +106,10 @@ public class App extends PApplet {
 	 * Called once on load. Used to create the  window and "global" settings.
 	 */
 	public void setup() {
+		skin = 0;
 		this.background(this.BLACK); //set background  color
+		this.bgImage = this.loadImage("Background.bmp");
+		//this.image(this.bgImage,0,0,w,h);
 		
 		//initialize spaceship
 		this.spaceship = new Spaceship(this); // pass reference to this App object
@@ -136,7 +145,10 @@ public class App extends PApplet {
 		//wipe the screen blank
 		if(stopDraw)
 			return;
-		this.background(this.BLACK);
+		if(skin == 0) 
+			this.background(this.BLACK);
+		else
+			this.image(this.bgImage,0,0,w,h);
 		
 		
 		//draw the spaceship
@@ -267,6 +279,13 @@ public class App extends PApplet {
 		else if(key == 'r' || key == 'R')
 		{
 			setup();
+		}
+		else if(key == 's' || key == 'S')
+		{
+			if(skin == 0) 
+				skin = 1;
+			else 
+				skin = 0;
 		}
 	}	
 	
