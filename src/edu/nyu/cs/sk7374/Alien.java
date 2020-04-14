@@ -12,7 +12,7 @@ public class Alien extends GameObject {
 
 	
 	//make sure the image file is in the src  folder
-	private final static String ALIEN_IMAGE_PATH  = "alien.png"; //alien image file
+	private final static String ALIEN_IMAGE_PATH  = "EnemyTank.png"; //alien image file
 	//private PImage img; //will hold the image to  use for this alien
 	
 	private final static int MAX_SPEED = 4; // maximum speed the alien will move in any  direction

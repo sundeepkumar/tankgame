@@ -7,7 +7,7 @@ import processing.core.PApplet;
  * 
  * This class represents the spaceship.
  * @author Sanchit Kumar
- * @version 0.1
+ * @version 0.1 
  *
  */
 public class Spaceship  extends GameObject {

@@ -89,7 +89,7 @@ public class App extends PApplet {
 	 * Called once to set up window
 	 */
 	public void settings() {
-		this.size(this.w, this.h); //set window size		
+		this.size(this.w, this.h); //set window size	
 	}
 	
 	public int getWidth()
@@ -110,6 +110,7 @@ public class App extends PApplet {
 		this.background(this.BLACK); //set background  color
 		this.bgImage = this.loadImage("Background.bmp");
 		//this.image(this.bgImage,0,0,w,h);
+		
 		
 		//initialize spaceship
 		this.spaceship = new Spaceship(this); // pass reference to this App object
@@ -279,6 +280,7 @@ public class App extends PApplet {
 		else if(key == 'r' || key == 'R')
 		{
 			setup();
+			stopDraw = false;
 		}
 		else if(key == 's' || key == 'S')
 		{
