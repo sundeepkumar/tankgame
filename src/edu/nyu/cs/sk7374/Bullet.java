@@ -192,13 +192,13 @@ public class Bullet extends GameObject{
 	/**
 	 * Draws this alien to the PApplet screen.   Each alien draws itself to the main app  screen in this way.
 	 */
-	public void draw() {
+	/*public void draw() {
 		//draw the image using PApplet's image  method
 		//this.app.image(this.img, this.x, this.y);
 		//getApp().image(this.img, this.x, this.y);
 		//getApp().image(getImg(), this.x, this.y);
 		getApp().image(getImg(), getX(), getY());
-	}
+	}*/
 	
 	/**
 	 * Static method to check collision between any bullet and any alien
