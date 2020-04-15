@@ -19,22 +19,74 @@ public class TankWorld extends PApplet {
 	private final int h = 600;
 	
 	private static final String WIN_MESSAGE = "You Win!!";
-	//make constants for some common colors... it's ok to make constants public
+	private static final String BACKGROUND_IMAGE_PATH = "Background.bmp"; 
+	private static final String HELP_IMAGE_PATH = "help.jpg"; 
+	private static final String WELCOME_IMAGE_PATH = "Welcome.jpg"; 
+	
+	
+	// Help and Welcome Messages 
+	private static final String WELCOME_MESSAGE ="Welcome to Sanchit's Tank Commander";
+	
+	private static final String GAME_CONTROLS_MESSAGE = "Game Controls";
+	private static final String ARROW_KEY_MESSAGE = "Press Arrow Keys to move the Tank ";
+	private static final String SPACE_KEY_MESSAGE ="Press Space to Shoot at the Enemy ";
+	private static final String T_KEY_MESSAGE ="Press T to move the Tank around";
+	private static final String W_KEY_MESSAGE ="Press W to Enter Tank Straight Line move mode";
+	private static final String O_KEY_MESSAGE ="Press O to Enter Tank random move mode (Default)";
+	private static final String R_KEY_MESSAGE ="Press R to Restart the game";
+	private static final String S_KEY_MESSAGE ="Press S to Change the Skin";
+	private static final String E_KEY_MESSAGE ="Press E to Toggle Enemy Tank Movement Mode";
+	private static final String Q_KEY_MESSAGE ="Press Q to Quit the Game";
+	private static final String H_KEY_MESSAGE ="Press H anytime for Help";
+	
+	private static final String ENTER_KEY_MESSAGE = "Please press Enter to Continue!!";
+	
+	// Common Colors 
 	public final int BLACK = this.color(0,0,0);
 	public final int WHITE = this.color(255,255,255);
 	
-	//make constants for some common spacing... it's ok to make constants public
+	// Common Keys 
+	
+	public final char KEY_s = 's';
+	public final char KEY_S = 'S';
+	public final char KEY_e = 'e';
+	public final char KEY_E = 'E';
+	public final char KEY_h = 'h';
+	public final char KEY_H = 'H';
+	public final char KEY_w = 'w';
+	public final char KEY_W = 'W';
+	public final char KEY_o = 'o';
+	public final char KEY_O = 'O';
+	public final char KEY_q = 'q';
+	public final char KEY_Q = 'Q';
+	public final char KEY_r = 'r';
+	public final char KEY_R = 'R';
+	public final char KEY_t = 't';
+	public final char KEY_T = 'T';
+	
+	//Tank spacing constants 
 	public final static int ENEMY_TANK_SPACING = 20; 
 	public final static int APP_MARGIN = 60; 
 	public final static int NUM_ENEMY_TANKS = 20;
 	
-	private boolean stopDraw = false;
+	private static boolean welcomeShown= false; // Welcome Screen
+	
+	private boolean stopDraw = false; // Stop Drawing the screen 
+	
+	
 	
 	//variable to hold the tank
 	private Tank tank;
 	
 	// Background Image for the game - used for skinning
 	private  PImage  bgImage; 
+	
+	// Help Screen Image 
+	private PImage  helpImage;
+	
+	
+	// Welcome Screen Image 
+	private PImage  welcomeImage;
 	
 	// Skin number 
 	private int skin; 
@@ -120,7 +172,11 @@ public class TankWorld extends PApplet {
 	public void setup() {
 		skin = 0;
 		this.background(this.BLACK); //set background  color
-		this.bgImage = this.loadImage("Background.bmp");
+		this.bgImage = this.loadImage(BACKGROUND_IMAGE_PATH);
+		
+		this.helpImage = this.loadImage(HELP_IMAGE_PATH);
+		
+		this.welcomeImage = this.loadImage(WELCOME_IMAGE_PATH);
 		
 		
 		//initialize tank
@@ -154,6 +210,8 @@ public class TankWorld extends PApplet {
 	 * Called repeatedly approximately 24 times  per second - Draw the main screen
 	 */
 	public void draw() {
+		if(!TankWorld.welcomeShown)
+			showWelcome();
 		//wipe the screen blank or load a Skin 
 		if(stopDraw)
 			return;
@@ -223,6 +281,7 @@ public class TankWorld extends PApplet {
 		{
 			textSize(30);
 			text(TankWorld.WIN_MESSAGE, w/2, h/2);
+			text(TankWorld.R_KEY_MESSAGE, 100, 500);
 			stopDraw(true);
 		}
 		else 
@@ -241,6 +300,48 @@ public class TankWorld extends PApplet {
 			bullet.kill(); //tell the bullet to  kill itself
 		}
 
+	}
+	/**
+	 * Show Help Messages 
+	 * x , y move the message on the screen
+	 */
+	private void showHelpMessages(int x , int y )
+	{
+		this.textSize(20);
+		this.text(TankWorld.GAME_CONTROLS_MESSAGE, x,y+170);
+		this.text(TankWorld.ARROW_KEY_MESSAGE, x,y+190);
+		this.text(TankWorld.SPACE_KEY_MESSAGE, x,y+210);
+		this.text(TankWorld.T_KEY_MESSAGE, x,y+230);
+		this.text(TankWorld.W_KEY_MESSAGE, x,y+250);
+		this.text(TankWorld.O_KEY_MESSAGE, x,y+270);
+		this.text(TankWorld.R_KEY_MESSAGE, x,y+290);
+		this.text(TankWorld.S_KEY_MESSAGE, x,y+310);
+		this.text(TankWorld.E_KEY_MESSAGE, x,y+330);
+		this.text(TankWorld.Q_KEY_MESSAGE, x,y+350);
+		this.text(TankWorld.H_KEY_MESSAGE, x,y+370);
+		this.textSize(30);
+		this.text(TankWorld.ENTER_KEY_MESSAGE, x,y+500);
+	}
+	/**
+	 * Show Help
+	 */
+	private void showHelp()
+	{
+		this.image(this.helpImage,0,0,w,h);
+		showHelpMessages(100,-100);
+		this.stopDraw(true);
+	}
+	/**
+	 * Show Welcome Splash
+	 */
+	private void showWelcome()
+	{
+		this.image(this.welcomeImage,0,0,w,h);
+		this.textSize(30);
+		this.text(WELCOME_MESSAGE, 100,100);
+		showHelpMessages(100,0);
+		this.stopDraw(true);
+		welcomeShown = true;
 	}
 
 	/**
@@ -276,36 +377,44 @@ public class TankWorld extends PApplet {
 		{
 			stopDraw(false);
 		}
-		else if(key == 't' || key == 'T') // Turn the Tank - will allow for 360 Degree  Operation 
+		else if(key == KEY_t || key == KEY_T) // Turn the Tank - will allow for 360 Degree  Operation 
 		{
 			this.tank.goTurn();  //Turn the Tank
 		}
-		else if(key == 'q' || key == 'Q') // Set to Straight movement mode for the Tank 
+		else if(key == KEY_w || key == KEY_W) // Set to Straight movement mode for the Tank 
 		{
 			this.tank.setMovementType(0);
 		}
-		else if(key == 'p' || key == 'P') // Set to a Random movement mode for the Tank 
+		else if(key == KEY_o || key == KEY_O) // Set to a Random movement mode for the Tank 
 		{
 			this.tank.setMovementType(1); 
 		}		
-		else if(key == 'r' || key == 'R') // Reset and Restart the game 
+		else if(key == KEY_r || key == KEY_R) // Reset and Restart the game 
 		{
 			setup(); // Call setUp to reset 
 			stopDraw = false; // Start Drawing again
 		}
-		else if(key == 's' || key == 'S') // Toggle the Skin 
+		else if(key == KEY_s || key == KEY_S) // Toggle the Skin 
 		{
 			if(skin == 0) 
 				skin = 1;
 			else 
 				skin = 0;
 		}
-		else if(key == 'e' || key == 'E') //Change the Enemy Tank Mode of movement 
+		else if(key == KEY_e || key == KEY_E) //Change the Enemy Tank Mode of movement 
 		{
 			if(EnemyTank.getMoveMode() == 0) 
 				EnemyTank.setMoveMode(1);
 			else 
 				EnemyTank.setMoveMode(0);
+		}
+		else if ( key == KEY_h || key == KEY_H) // Show Help Screen n 
+		{
+			showHelp();
+		}
+		else if ( key == KEY_q || key == KEY_Q) // Quit
+		{
+			System.exit(0);
 		}
 	}	
 	

@@ -24,6 +24,8 @@ public class Tank  extends GameObject {
 	
 	private final static String RESUME_MESSAGE= "Enter to Resume!!";
 	
+	private final static String RESTART_MESSAGE= "Enter  R to Restart or Q to Quit!!";
+	
 	private final static String NUM_LIVES =  " Lives Left!!";
 	
 	private  int numlives = 3; // Three lives allowed
@@ -111,6 +113,7 @@ public class Tank  extends GameObject {
 			setAlive(false);
 			this.getApp().textSize(30);
 			this.getApp().text(GAME_OVER, getX(), getY());
+			this.getApp().text(RESTART_MESSAGE,  100, 500);
 			this.getApp().stopDraw(true);
 		}
 		else 
