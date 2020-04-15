@@ -12,102 +12,35 @@ import processing.core.PImage;
  */
 
 public class GameObject {
-	//will hold a reference to the App object, which inherits from PApplet and therefore handles all the  Processing-specific stuff
+		//will hold a reference to the TankWorld object, which inherits from PApplet and therefore handles all the  Processing-specific stuff
 		//PApplet app;
-		private App app;
+		
+		private TankWorld app;
 		
 		private int movementType = 1; // 0 = left right or up down 1 =  Whole battle field 
-		
-		public int getMovementType()
-		{
-			return this.movementType;
-		}
-		
-		public void setMovementType(int movementType)
-		{
-			this.movementType = movementType;
-		}
-		
-		public PImage getImg() {
-			return img;
-		}
-		public void setImg(PImage img) {
-			this.img = img;
-		}
-		
-		public boolean isAlive() {
-			return isAlive;
-		}
-		public void setAlive(boolean isAlive) {
-			this.isAlive = isAlive;
-		}
-		
 		private int direction = 0;
-		
-		public int getDirection()
-		{
-			return this.direction;
-		}
-		
-		public void setDirection(int direction)
-		{
-			this.direction = direction;
-		}
-
 		private boolean isAlive = true; //flag to  hold living status of this alien
-
-		//make sure the image file is in the src  folder
-		//private final static String SPACESHIP_IMAGE_PATH = "spaceship.png"; // image file
-		private PImage img; //will hold the image to  use for this spaceship
 		
-		
+		private PImage img; //will hold the image to  use for this GameObject
+				
 		private int x, y; //position
-		private int speedX = 5; //speed in x  direction... start out going to the right
-		private int speedY = 5; //speed in Y direction... the y position is changed by this amount every time the ship goes up or down
+		private int speedX = 5; //speed in x  direction
+		private int speedY = 5; //speed in Y direction
 	
-		
-		public App getApp() {
+		/**
+		 * Get the instance of the App 
+		 */
+		public TankWorld getApp() {
 			return  this.app;
 		}
-		public int setInitialX() {
-			return 0;
-		}
 		
-		public int getX() {
-			return x;
-		}
-		public void setX(int x) {
-			this.x = x;
-		}
-		public int getY() {
-			return y;
-		}
-		public void setY(int y) {
-			this.y = y;
-		}
-		public int getSpeedX() {
-			return speedX;
-		}
-		public void setSpeedX(int speedX) {
-			this.speedX = speedX;
-		}
-		public int getSpeedY() {
-			return speedY;
-		}
-		public void setSpeedY(int speedY) {
-			this.speedY = speedY;
-		}
-		public int setInitialY() {
-			return 0;
-		}
-		
-		public String  getImage()
-		{
-			return null;
-		}
+		/**
+		 * Constructor for the GameObject.
+		 * Setter for the App property.
+		 */
 		public GameObject(PApplet app) {
-			//set up initial properties for this  alien
-			this.app = (App)app; //keep a reference to  the PApplet class to handle all  Processing-specific functions and  variables
+			//set up initial properties for this Game Object
+			this.app = (TankWorld)app; //keep a reference to  the PApplet class to handle all  Processing-specific functions and  variables
 
 			//position it on screen
 			this.x = setInitialX();
@@ -116,10 +49,13 @@ public class GameObject {
 			//load the image and store in PImage  variable
 			this.img = this.app.loadImage(getImage());
 		}
-		
+		/**
+		 * Constructor for the GameObject.
+		 * Setter for the App and x, y properties.
+		 */
 		public GameObject(PApplet app , int x, int y ) {
-			//set up initial properties for this  alien
-			this.app = (App)app; //keep a reference to  the PApplet class to handle all  Processing-specific functions and  variables
+			//set up initial properties for this  GameObject
+			this.app = (TankWorld)app; //keep a reference to  the PApplet class to handle all  Processing-specific functions and  variables
 
 			//position it on screen
 			this.x = x;
@@ -128,31 +64,163 @@ public class GameObject {
 			//load the image and store in PImage  variable
 			this.img = this.app.loadImage(getImage());
 		}
+		
+		/**
+		 * getter for the movementType property.
+		 */
+		public int getMovementType()
+		{
+			return this.movementType;
+		}
+		/**
+		 * Setter for the movementType property.
+		 */
+		public void setMovementType(int movementType)
+		{
+			this.movementType = movementType;
+		}
+		
+		/**
+		 * getter for the img property
+		 */
+		public PImage getImg() {
+			return img;
+		}
+		
+		/**
+		 * setter for the img property
+		 */
+		public void setImg(PImage img) {
+			this.img = img;
+		}
+		
+		/**
+		 * getter for the isAlive property
+		 */
+		public boolean isAlive() {
+			return isAlive;
+		}
+		/**
+		 * setter for the isAlive property
+		 */
+		public void setAlive(boolean isAlive) {
+			this.isAlive = isAlive;
+		}
+		
+		/**
+		 * getter for the direction property
+		 */
+		public int getDirection()
+		{
+			return this.direction;
+		}
+		
+		/**
+		 * setter for the direction property
+		 */
+		public void setDirection(int direction)
+		{
+			this.direction = direction;
+		}
 
 		/**
-		 * Get the width of this spaceship, based on  the width of its image.
+		 * gets the initial x for the derived Object - Overridden by the Derived class
+		 */
+		public int setInitialX() {
+			return 0;
+		}
+		/**
+		 * gets the initial Y for the derived Object - Overridden by the Derived class
+		 */
+		public int setInitialY() {
+			return 0;
+		}
+		
+		/**
+		 * getter for the x property
+		 */
+		public int getX() {
+			return x;
+		}
+		/**
+		 * setter for the x property
+		 */
+		public void setX(int x) {
+			this.x = x;
+		}
+		
+		/**
+		 * getter for the y property
+		 */
+		public int getY() {
+			return y;
+		}
+		/**
+		 * getter for the y property
+		 */
+		public void setY(int y) {
+			this.y = y;
+		}
+		
+		/**
+		 * getter for the speedX property
+		 */
+		public int getSpeedX() {
+			return speedX;
+		}
+		/**
+		 * getter for the speedX property
+		 */
+		public void setSpeedX(int speedX) {
+			this.speedX = speedX;
+		}
+		
+		/**
+		 * getter for the speedY property
+		 */
+		public int getSpeedY() {
+			return speedY;
+		}
+		/**
+		 * getter for the y property
+		 */
+		public void setSpeedY(int speedY) {
+			this.speedY = speedY;
+		}
+		
+		/**
+		 * get the Image - Overridden by the Derived class 
+		 */
+		public String  getImage()
+		{
+			return null;
+		}
+		
+
+		/**
+		 * Get the width of this GameObject, based on  the width of its image.
 		 */
 		public int getWidth() {
 			return this.img.width;
 		}
 		
 		/**
-		 * Get the height of this spaceship, based  on the width of its image.
+		 * Get the height of this GameObject, based  on the width of its image.
 		 */
 		public int getHeight() {
 			return this.img.height;
 		}
 		
 		/**
-		 * Slide the spaceship further to the right  or left, depending upon the current  direction it's moving.
+		 * Slide the GameObject  further to the right  or left, depending upon the current  direction it's moving.
 		 */
 		public void move() {
 			if((getMovementType() ==1 ) || (getDirection()== 0 )|| (getDirection() == 2)) {
 				int newX = getX() + getSpeedX(); // calculate move by whichever amount is  specified in speedX variable.
 				
 				//check bounds
-				boolean outOfBoundsToTheLeft = newX < 0  + App.APP_MARGIN; //too far to the left?
-				boolean outOfBoundsToTheRight = newX >  this.getApp().width - this.getWidth() - App. APP_MARGIN; //too far to the right?
+				boolean outOfBoundsToTheLeft = newX < 0  + TankWorld.APP_MARGIN; //too far to the left?
+				boolean outOfBoundsToTheRight = newX >  this.getApp().width - this.getWidth() - TankWorld. APP_MARGIN; //too far to the right?
 		
 				//if out of bounds...
 				if (outOfBoundsToTheRight ||  outOfBoundsToTheLeft) {
@@ -168,8 +236,8 @@ public class GameObject {
 			
 				int newY = this.getY() + this.getSpeedY(); // calculate move by whichever amount is  specified in speedY variable.
 				//check bounds
-				boolean outOfBoundsToTheTop = newY > getApp().getHeight()  - App.APP_MARGIN; //too far to the Top?
-				boolean outOfBoundsToTheBottom = newY <  0 + App. APP_MARGIN; //too far to the bottom?
+				boolean outOfBoundsToTheTop = newY > getApp().getHeight()  - TankWorld.APP_MARGIN; //too far to the Top?
+				boolean outOfBoundsToTheBottom = newY <  0 + TankWorld. APP_MARGIN; //too far to the bottom?
 		
 				//if out of bounds...
 				if (outOfBoundsToTheTop ||  outOfBoundsToTheBottom ) {
@@ -184,7 +252,7 @@ public class GameObject {
 	    }
 		
 		/**
-		 * Sets by how much this spaceship moves  each frame.
+		 * Sets by how much this GameObject moves  each frame.
 		 * Setter for speedX property.
 		 */
 		public void setSpeed(int speedX) {
@@ -196,30 +264,28 @@ public class GameObject {
 		 */
 		public void draw() {
 			//draw the image using PApplet's image  method
-			//this.app.image(this.img, this.x, this.y);
 			if (isAlive()) {
 				//draw the image using PApplet's  image method
-				//this.app.image(this.img, this.x, this.y);
 				this.getApp().image(this.getImg(), getX(), getY());
 			}
 		}
 
 		/**
-		 * Move this spaceship in the opposite  direction from which it is currently moving
+		 * Move this GameObject in the opposite  direction from which it is currently moving
 		 */
 		public void toggleDirection() {
 			this.speedX = -this.speedX; //invert the  sign of the speed it's currently moving
 		}
 		
 		/**
-		 * Move this spaceship in the opposite  direction from which it is currently moving
+		 * Move this GameObject in the opposite  direction from which it is currently moving
 		 */
 		public void toggleDirectionY() {
 			this.speedY = -this.speedY; //invert the  sign of the speed it's currently moving
 		}
 		
 		/**
-		 * Set speed such that the spaceship moves  to the right.
+		 * Set speed such that the GameObject moves  to the right.
 		 */
 		public void goRight() {
 			//set speed to a positive value
@@ -229,7 +295,7 @@ public class GameObject {
 		}
 
 		/**
-		 * Set speed such that the spaceship moves to the right.
+		 * Set speed such that the GameObject moves to the right.
 		 */
 		public void goLeft() {
 			//set speed to a negative value
@@ -237,7 +303,7 @@ public class GameObject {
 		}
 
 		/**
-		 * Set speed such that the spaceship moves to up.
+		 * Set speed such that the GameObject moves to up.
 		 */
 		public void goUp() {
 			//set speed to a negative value
@@ -246,15 +312,15 @@ public class GameObject {
 			//check bounds
 			boolean isTooFarUp = this.y < 0 + this.getHeight();
 
-			//if the spaceship is too far up...
+			//if the GameObject is too far up...
 			if (isTooFarUp) {
-				//reposition this spaceship at the bottom of the screen
+				//reposition this GameObject at the bottom of the screen
 				this.y = app.height - this.getHeight();
 			}
 		}
 		
 		/**
-		 * Set speed such that the spaceship moves to up.
+		 * Set speed such that the GameObject moves to up.
 		 */
 		public void goDown() {
 			//set speed to a negative value
@@ -263,9 +329,9 @@ public class GameObject {
 			//check bounds
 			boolean isTooFarDown = this.y > this.app.height - this.getHeight();
 
-			//if the spaceship is too far up...
+			//if the GameObject is too far up...
 			if (isTooFarDown) {
-				//reposition this spaceship at the bottom of the screen
+				//reposition this GameObject at the bottom of the screen
 				this.y = 0;
 			}
 		}

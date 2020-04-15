@@ -10,9 +10,9 @@ import processing.core.PApplet;
  * @version 0.1 
  *
  */
-public class Spaceship  extends GameObject {
+public class Tank  extends GameObject {
 
-	//will hold a reference to the App object, which inherits from PApplet and therefore handles all the  Processing-specific stuff
+	//will hold a reference to the TankWorld object, which inherits from PApplet and therefore handles all the  Processing-specific stuff
 	
 	
 	//make sure the image file is in the src  folder
@@ -48,7 +48,7 @@ public class Spaceship  extends GameObject {
 	}
 	
 	public int  setInitialY() {
-		return  getApp().height - App.APP_MARGIN; // y position close to bottom of screen
+		return  getApp().height - TankWorld.APP_MARGIN; // y position close to bottom of screen
 	}
 	
 	
@@ -63,7 +63,7 @@ public class Spaceship  extends GameObject {
 		else 
 			return SPACESHIP_IMAGE_PATH_RIGHT;
 	}
-	public Spaceship(PApplet app) {
+	public Tank(PApplet app) {
 		super(app);	
 	}
 	
