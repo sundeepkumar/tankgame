@@ -20,7 +20,8 @@ public class Tank  extends GameObject {
 	
 	private final static String TANK_IMAGE_PATH_RIGHT = "TankR.png"; // image file
 	
-	private final static String GAME_OVER = "Game Over";
+	
+	private final static String GAME_OVER_PATH = "gameover.png"; // image file
 	
 	private final static String RESUME_MESSAGE= "Enter to Resume!!";
 	
@@ -111,9 +112,9 @@ public class Tank  extends GameObject {
 	public void kill() {
 		if(numlives == 1) {
 			setAlive(false);
+			getApp().showSplash(GAME_OVER_PATH);
 			this.getApp().textSize(30);
-			this.getApp().text(GAME_OVER, getX(), getY());
-			this.getApp().text(RESTART_MESSAGE,  100, 500);
+			this.getApp().text(RESTART_MESSAGE,  100, 500);		
 			this.getApp().stopDraw(true);
 		}
 		else 

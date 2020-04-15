@@ -18,10 +18,10 @@ public class TankWorld extends PApplet {
 	private final int w = 800;
 	private final int h = 600;
 	
-	private static final String WIN_MESSAGE = "You Win!!";
 	private static final String BACKGROUND_IMAGE_PATH = "Background.bmp"; 
 	private static final String HELP_IMAGE_PATH = "help.jpg"; 
 	private static final String WELCOME_IMAGE_PATH = "Welcome.jpg"; 
+	private static final String YOU_WIN_PATH = "youwin.jpg"; 
 	
 	
 	// Help and Welcome Messages 
@@ -279,8 +279,8 @@ public class TankWorld extends PApplet {
 		int numEnemyTanks = this.enemyTanks.size();
 		if(numEnemyTanks == 0 )// All the enemies are dead so the  Player wins 
 		{
+			showSplash(YOU_WIN_PATH);
 			textSize(30);
-			text(TankWorld.WIN_MESSAGE, w/2, h/2);
 			text(TankWorld.R_KEY_MESSAGE, 100, 500);
 			stopDraw(true);
 		}
@@ -342,6 +342,12 @@ public class TankWorld extends PApplet {
 		showHelpMessages(100,0);
 		this.stopDraw(true);
 		welcomeShown = true;
+	}
+	
+	public void showSplash(String image)
+	{
+		PImage pimage = this.loadImage(image);
+		this.image(pimage,0,0,w,h);
 	}
 
 	/**
