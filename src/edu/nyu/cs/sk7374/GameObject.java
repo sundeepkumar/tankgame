@@ -19,7 +19,7 @@ public class GameObject {
 		
 		private int movementType = 1; // 0 = left right or up down 1 =  Whole battle field 
 		private int direction = 0;
-		private boolean isAlive = true; //flag to  hold living status of this alien
+		private boolean isAlive = true; //flag to  hold living status of this Tank
 		
 		private PImage img; //will hold the image to  use for this GameObject
 				
@@ -260,7 +260,7 @@ public class GameObject {
 		}
 		
 		/**
-		 * Draws this alien to the PApplet screen.   Each alien draws itself to the main app  screen in this way.
+		 * Draws this  Tank to the PApplet screen.   Each  Tank draws itself to the main app  screen in this way.
 		 */
 		public void draw() {
 			//draw the image using PApplet's image  method
