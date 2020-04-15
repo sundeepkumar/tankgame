@@ -17,21 +17,10 @@ public class EnemyTank extends GameObject {
 
 	private static int moveMode  = 1 ; // 0 = Random in X AXIS , 1  = Total Random 
 	
-	public static void setMoveMode(int mode)
-	{
-		moveMode  = mode;
-	}
-	
-	public static int getMoveMode()
-	{
-		return moveMode;
-	}
-	
-	public String  getImage()
-	{
-		return ENEMY_TANK_IMAGE_PATH ;
-	}
 
+	/**
+	 * constructor for the Enemy Tank -- sets the x, y and App properties
+	 */
 	public EnemyTank(int x, int y, PApplet app) {
 		super(app,x,y);
 	
@@ -39,10 +28,36 @@ public class EnemyTank extends GameObject {
 		setSpeedY(this.getRandomSpeedY());		
 		
 	}
+	
+	/**
+	 * getter for moveMode Property
+	 */
+	public static int getMoveMode()
+	{
+		return moveMode;
+	}
+	
+	/**
+	 * setter for moveMode Property
+	 */
+	public static void setMoveMode(int mode)
+	{
+		moveMode  = mode;
+	}
+	
+	/**
+	 * Overwritten by the Derived class to return the drawn image
+	 */
+	public String  getImage()
+	{
+		return ENEMY_TANK_IMAGE_PATH ;
+	}
+
+	
 
 	
 	/**
-	 * Get a random speed.
+	 * Get a random speed in the X direction 
 	 * @return random int between min and max  speed settings
 	 */
 	public int getRandomSpeedX() {
@@ -58,6 +73,11 @@ public class EnemyTank extends GameObject {
 		return speed;
 	}
 	
+
+	/**
+	 * Get a random speed in the Y direction
+	 * @return random int between min and max  speed settings
+	 */
 	public int getRandomSpeedY() {
 		int speed = getSpeedY();
 		if(EnemyTank.moveMode == 1) {
@@ -71,6 +91,11 @@ public class EnemyTank extends GameObject {
 		return speed;
 	}
 	
+
+	/**
+	 * Check if Enemy Tank Can shoot
+	 * @return random boolean if Enemy Tank can shoot
+	 */
 	public boolean canShoot() {
 		int num = (int) (Math.random() * 500) ;
 		if(num < 2 ) 
@@ -132,6 +157,9 @@ public class EnemyTank extends GameObject {
 		
 	}
 	
+	/**
+	 * Shoot at the Player 
+	 */
 	public void shoot() {
 		//create a new bullet object positioned  at the center of this Tank
 		int x = (int) (getX() + (this.getWidth()  / 2)); //the center x position of this  Tank

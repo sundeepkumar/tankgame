@@ -9,17 +9,13 @@ public class Bullet extends GameObject{
 	private final static String BULLET_IMAGE_PATH = "bullet.png"; //image  file
 	private final static String BULLET_IMAGE_PATH_LEFT = "bulletL.png"; //image  file
 	
-	public String  getImage()
-	{
-		if(this.getDirection() == 0   ||  this.getDirection() == 2)
-			return Bullet.BULLET_IMAGE_PATH;
-		else 
-			return Bullet.BULLET_IMAGE_PATH_LEFT;
-	}
+	public boolean enemy; // Enemy Bullet 
 	
-	
-	public boolean enemy;
-	
+
+	/**
+	 * Constructor for the Bullet Class 
+	 * Sets the x, y  and app properties
+	 */
 	public Bullet(int x, int y, PApplet app ) {
 		super(app);
 		
@@ -38,6 +34,11 @@ public class Bullet extends GameObject{
 
 	}
 	
+	
+	/**
+	 * Constructor for the Bullet Class 
+	 * Sets the x, y , App , direction and enemy properties
+	 */
 	public Bullet(int x, int y, PApplet app , int direction , boolean enemy ) {
 		super(app);
 		// Set the speed of the bullet
@@ -47,20 +48,35 @@ public class Bullet extends GameObject{
 		this.setX(x);
 		this.setY(y);
 		
-		setDirection(direction);
-		if(this.getDirection() == 2) {
+		setDirection(direction); // Set the Direction of the Bullet 
+		if(this.getDirection() == 2) { // 0 = Up , 1 = Left , 2 = Down 3 = Right 
 			this.setSpeedY(  -1* this.getSpeedY());
 		}
 		else if(this.getDirection() == 3) {
 			this.setSpeedX(  -1* this.getSpeedX());
 		}
 		
-		this.enemy = enemy;
+		this.enemy = enemy; // Set the Enemy property 
 				
-		setImg(getApp().loadImage(getImage()));
-		getApp().getBullets().add(this);
+		setImg(getApp().loadImage(getImage())); // Set the Image based on the Direction 
+		getApp().getBullets().add(this); // Add itself to the Bullets Array
 
 	}
+	
+	
+	/**
+	 * Called by the Base class to get the current image to Draw - Overridden by the Derived class.
+	 */
+	public String  getImage()
+	{
+		if(this.getDirection() == 0   ||  this.getDirection() == 2)
+			return Bullet.BULLET_IMAGE_PATH;
+		else 
+			return Bullet.BULLET_IMAGE_PATH_LEFT;
+	}
+	
+	
+	
 	
 	/**
 	 * Slide the bullet further up the screen.

@@ -5,27 +5,20 @@ import processing.core.PApplet;
 
 /**
  * 
- * This class represents the spaceship.
+ * This class represents the Tank.
  * @author Sanchit Kumar
  * @version 0.1 
  *
  */
 public class Tank  extends GameObject {
-
-	//will hold a reference to the TankWorld object, which inherits from PApplet and therefore handles all the  Processing-specific stuff
 	
+	private final static String TANK_IMAGE_PATH_UP = "TankU.png"; // image file
 	
-	//make sure the image file is in the src  folder
-	//private final static String SPACESHIP_IMAGE_PATH = "spaceship.png"; // image file
-	private final static String SPACESHIP_IMAGE_PATH = "TankU.png"; // image file
+	private final static String TANK_IMAGE_PATH_LEFT = "TankL.png"; // image file
 	
-	private final static String SPACESHIP_IMAGE_PATH_UP = "TankU.png"; // image file
+	private final static String TANK_IMAGE_PATH_DOWN = "TankD.png"; // image file
 	
-	private final static String SPACESHIP_IMAGE_PATH_LEFT = "TankL.png"; // image file
-	
-	private final static String SPACESHIP_IMAGE_PATH_DOWN = "TankD.png"; // image file
-	
-	private final static String SPACESHIP_IMAGE_PATH_RIGHT = "TankR.png"; // image file
+	private final static String TANK_IMAGE_PATH_RIGHT = "TankR.png"; // image file
 	
 	private final static String GAME_OVER = "Game Over";
 	
@@ -33,60 +26,75 @@ public class Tank  extends GameObject {
 	
 	private final static String NUM_LIVES =  " Lives Left!!";
 	
-	private  int numlives = 3;
+	private  int numlives = 3; // Three lives allowed
 	
-	//private int direction = 0;
-	
+	/**
+	 * Turn the Tank 
+	 */
 	public void goTurn()
 	{
 		this.setDirection((this.getDirection()+1)%4); 
 		setImg(getApp().loadImage(getImage()));
 	}
 
+	/**
+	 * Set the initial x position 
+	 */
 	public int  setInitialX() {
 		return (int) (this.getApp().width / 2); //x  position centered on screen
 	}
 	
+
+	/**
+	 * Set the initial y position 
+	 */
 	public int  setInitialY() {
 		return  getApp().height - TankWorld.APP_MARGIN; // y position close to bottom of screen
 	}
 	
-	
+	/**
+	 * Overridden by the Derived class  to return current image
+	 */
 	public String  getImage()
 	{
 		if(this.getDirection()== 0 )
-			return SPACESHIP_IMAGE_PATH_UP;
+			return TANK_IMAGE_PATH_UP;
 		else if(this.getDirection() == 1 )
-			return SPACESHIP_IMAGE_PATH_LEFT;
+			return TANK_IMAGE_PATH_LEFT;
 		else if(this.getDirection() == 2 )
-			return SPACESHIP_IMAGE_PATH_DOWN;
+			return TANK_IMAGE_PATH_DOWN;
 		else 
-			return SPACESHIP_IMAGE_PATH_RIGHT;
+			return TANK_IMAGE_PATH_RIGHT;
 	}
+	
+
+	/**
+	 * Tank Constructor
+	 */
 	public Tank(PApplet app) {
 		super(app);	
 	}
 	
 	/**
-	 * Shoots a bullet out of the spaceship.
+	 * Shoots a bullet out of the Tank.
 	 */
 	public void shoot() {
-		//create a new bullet object positioned  at the center of this spaceship
+		//create a new bullet object positioned  at the center of this Tank
 		int x=getX();
 		int y= getY();
 		if(getDirection()== 0 ) {
-			x = (int) (getX() + (this.getWidth()  / 2)); //the center x position of this  spaceship
-			y = (int) (getY() - (this. getHeight() / 2)); //the center y  position of this spaceship
+			x = (int) (getX() + (this.getWidth()  / 2)); //the center x position of this  Tank
+			y = (int) (getY() - (this. getHeight() / 2)); //the center y  position of this Tank
 		}
 		else if(getDirection()== 1 ) {
-			y = (int) (getY() + (this. getHeight() / 2)); //the center y  position of this spaceship
+			y = (int) (getY() + (this. getHeight() / 2)); //the center y  position of this Tank
 		}
 		else if(getDirection()== 2 ) {
-			x = (int) (getX() + (this.getWidth()  / 2)); //the center x position of this  spaceship
-			y = (int) (getY() + (this. getHeight() / 2)); //the center y  position of this spaceship
+			x = (int) (getX() + (this.getWidth()  / 2)); //the center x position of this  Tank
+			y = (int) (getY() + (this. getHeight() / 2)); //the center y  position of this Tank
 		}
 		else if(getDirection()== 3 ) {
-			x = (int) (getX() + (this.getWidth() )); //the center x position of this  spaceship
+			x = (int) (getX() + (this.getWidth() )); //the center x position of this  Tank
 			y = (int) (getY() + (this. getHeight() / 2));
 		}
 		//create bullet object
@@ -94,6 +102,10 @@ public class Tank  extends GameObject {
 		
 	}
 	
+
+	/**
+	 * Kill the Tank
+	 */
 	public void kill() {
 		if(numlives == 1) {
 			setAlive(false);
